@@ -1,0 +1,197 @@
+<html>
+<head>
+<title>Viktor Math</title>
+<!--
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+-->
+<style>
+<!--
+.key {font:normal 14pt verdana; background-color:silver;padding:10px;width:30px;text-align:center;}
+.butt {font:bold 10pt verdana; background-color:khaki;padding:10px;}
+.ques {font:normal 40pt verdana; background-color:lavender;padding:20px; width:140px;height:50px;}
+.resp {font:normal 40pt verdana; background-color:gold;padding:20px; width:50px;height:50px;}
+.respok {font:normal 40pt verdana; background-color:green;color:white;padding:20px; width:50px;height:50px;}
+.resper {font:normal 40pt verdana; background-color:red;color:white;padding:20px; width:50px;height:50px;}
+.counok {font:normal 8pt verdana; background-color:green;color:white;padding:6px;}
+.couner {font:normal 8pt verdana; background-color:red;color:white;padding:6px;}
+-->
+.key {font:normal 20pt verdana; background-color:silver;padding:10px;}
+.butt {font:bold 16pt verdana; background-color:khaki;padding:10px;}
+.ques {font:normal 60pt verdana; background-color:lavender;padding:20px; width:60%;height:140px;}
+.resp {font:normal 60pt verdana; background-color:gold;padding:20px; }
+.respok {font:normal 60pt verdana; background-color:green;color:white;padding:20px; width:80px;height:80px;}
+.resper {font:normal 60pt verdana; background-color:red;color:white;padding:20px; width:80px;height:80px;}
+.counok {font:bold 8pt verdana; background-color:green;color:white;padding:6px;}
+.couner {font:bold 8pt verdana; background-color:red;color:white;padding:6px;}
+</style>
+<script>
+var base= 9;
+var diff= 2;
+var maxi= 10;
+var acon= ["+","-"];
+					var coye= 0;
+					var cono= 0;
+function para(){
+	var text= "";
+	do {
+		text += "current params are : "+base+","+diff+","+maxi+"\n";
+		text += "input new params";
+		var resu= prompt(text);
+			var arre= resu.split(",");
+			var b2= parseInt(arre[0]);
+			var d2= parseInt(arre[1]);
+			var m2= parseInt(arre[2]);
+		var flager= false;
+		if (isNaN(b2) || isNaN(d2) || isNaN(m2)){
+			flager= true;
+			text= "ERROR=not.number\n\n";
+		}else if (b2<1 || d2<1 || m2<1){
+			flager= true;
+			text= "ERROR=range\n\n";
+		}else{
+			base= b2;
+			diff= d2;
+			maxi= m2
+		}
+	} while (flager)
+	text= "current params are : "+base+","+diff+","+maxi+"\n";
+	alert(text);
+}
+function geth(p1){
+return document.getElementById(p1).innerHTML;
+}
+function puth(p1,p2){
+	document.getElementById(p1).innerHTML= p2;
+}
+function putrespcl(p1){
+	document.getElementById("resp").className= p1;
+}
+function pemp(){
+var curr= geth("resp");
+	puth("resp","");
+	putrespcl("resp");
+}
+function pkey(p1){
+	var curr= geth("resp");
+	puth("resp",curr+p1);
+}
+function pent(){
+	var ques= geth("ques");
+	var resp= geth("resp");
+		var respint= parseInt(resp);
+	var resu= eval(ques);
+		if (respint == resu){
+			putrespcl("respok");
+			document.getElementById("soundyes").play();
+					coye ++;
+					puth("counok",coye);
+		}else{
+			putrespcl("resper");
+			document.getElementById("soundno").play();
+					cono ++;
+					puth("couner",cono);
+		}
+}
+function start(){
+	do {
+		var p1= Math.round(Math.random()*base);
+		var p2= Math.round(Math.random()*diff);
+		var indx= Math.round(Math.random());
+		var ques= p1+acon[indx]+p2;
+		var resu= eval(ques);
+			var resuint= parseInt(resu);
+		var flager= false;
+		if (resuint > maxi || resuint < 0){
+			flager= true;
+		}else{
+		}
+	} while (flager)
+	puth("ques",ques);
+	puth("resp","");
+	putrespcl("resp");
+}
+</script>
+</head>
+
+<body>
+<div style="position:absolute;top:0px;left:0px;width:100px;height:100px;" onclick="para();"></div>
+<audio id="soundyes" src="ringin.wav">
+<p>no audio support</p>
+</audio>
+<audio id="soundno" src="sound55.wav">
+<p>no audio support</p>
+</audio>
+			<table align=center>
+			<tr>
+<td valign=top>
+				<table align=center width=100%>
+				<tr>
+<td class="ques" id="ques" align=center style="white-space:nowrap;">
+<td class="resp" id="resp" align=center style="white-space:nowrap;">
+				<tr>
+<td height=20>&nbsp;
+				<tr>
+<td>
+<span class="butt" onclick="start();"> next </span>
+<!--
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="butt" onclick="pemp();"> end </span>
+-->
+<td>
+<nobr>
+<span class="butt" onclick="pemp();"> clear </span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="counok" class="counok">0</span>
+<span id="couner" class="couner">0</span>
+</nobr>
+				</table>
+<!--
+<td valign=top>
+				<table align=center>
+				<tr>
+<td class="key" onclick="pkey('1');"> 1
+<td class="key" onclick="pkey('2');"> 2
+<td class="key" onclick="pkey('3');"> 3
+<td class="key" onclick="pkey('4');"> 4
+				<tr>
+<td class="key" onclick="pkey('5');"> 5
+<td class="key" onclick="pkey('6');"> 6
+<td class="key" onclick="pkey('7');"> 7
+<td class="key" onclick="pkey('8');"> 8
+				<tr>
+<td class="key" onclick="pkey('9');"> 9
+<td class="key" onclick="pkey('0');"> 0
+<td class="key" colspan=2 onclick="pent();"> enter
+				</table>
+-->
+			<tr>
+<td height=20> &nbsp;
+<!--
+			<tr>
+<td colspan=2 align=center>
+<span id="counok" class="counok">0</span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="couner" class="couner">0</span>
+			</table>
+-->
+			<tr>
+<td colspan=12>
+				<table align=center>
+				<tr>
+<td class="key" onclick="pkey('1');"> 1
+<td class="key" onclick="pkey('2');"> 2
+<td class="key" onclick="pkey('3');"> 3
+<td class="key" onclick="pkey('4');"> 4
+<td class="key" onclick="pkey('5');"> 5
+<td class="key" onclick="pkey('6');"> 6
+<td class="key" onclick="pkey('7');"> 7
+<td class="key" onclick="pkey('8');"> 8
+<td class="key" onclick="pkey('9');"> 9
+<td class="key" onclick="pkey('0');"> 0
+				<tr>
+<td colspan=7> &nbsp;
+<td class="key" colspan=3 onclick="pent();"> enter
+				</table>
+			</table>
+</body>
+</html>
